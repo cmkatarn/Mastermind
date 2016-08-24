@@ -77,16 +77,23 @@ public class Mastermind {
         private void checkAgainstSolution(String guess){
             String fixed = guess.toUpperCase();
             int matches = 0;
+            int misses = 0;
             for(int i = 0; i<4; i++){
                 if(fixed.charAt(i)==sequence[i]){
                     matches++;
+                }else{
+                    for(int j = 0; j<=i; j++) {
+                        if(sequence[j]==fixed.charAt(i) && j!=i) {
+                            misses++;
+                        }
+                    }
                 }
             }
             if(matches==4){
                 correctCombinationNotFound = false;
                 System.out.println("You found the correct combination on turn " + turnsTaken + "!!! Congratulations!");
             }else {
-                System.out.println("There were " + matches + " matching positions.");
+                System.out.println("There were " + matches + " matching positions, and " + misses + " misses.");
             }
         }
     }
